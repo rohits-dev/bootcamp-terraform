@@ -1,9 +1,9 @@
 # Change these
-owner-email = "sven@confluent.io"
-owner-name = "sven"
-key-name = "sven-ireland-sa"
+owner-email = "rshrivastava@confluent.io"
+owner-name = "rshrivastava"
+key-name = "rohit"
 purpose = "bootcamp-prep"
-aws-profile = "default"
+aws-profile = "492737776546-ConfluentSAAdminRole"
 
 # Do not touch these
 region = "eu-west-1"

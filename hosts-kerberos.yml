@@ -1,0 +1,81 @@
+# Automatically created from terraform data on 
+
+all:
+  vars:
+    ansible_connection: ssh
+    ansible_user: ubuntu
+    ansible_become: true
+    ansible_ssh_private_key_file: rohit
+
+
+zookeeper:
+  hosts:
+    ip-172-30-23-66.eu-west-1.compute.internal:
+        zookeeper_kerberos_keytab_path: /home/ubuntu/cp-ansible/kerberos/zookeeper-ip-172-30-23-66.keytab
+        zookeeper_kerberos_principal: zookeeper/ip-172-30-23-66.eu-west-1.compute.internal@BOOTCAMP-EUROPE.CONFLUENT.IO
+    ip-172-30-22-217.eu-west-1.compute.internal:
+        zookeeper_kerberos_keytab_path: /home/ubuntu/cp-ansible/kerberos/zookeeper-ip-172-30-22-217.keytab
+        zookeeper_kerberos_principal: zookeeper/ip-172-30-22-217.eu-west-1.compute.internal@BOOTCAMP-EUROPE.CONFLUENT.IO
+    ip-172-30-27-93.eu-west-1.compute.internal:
+        zookeeper_kerberos_keytab_path: /home/ubuntu/cp-ansible/kerberos/zookeeper-ip-172-30-27-93.keytab
+        zookeeper_kerberos_principal: zookeeper/ip-172-30-27-93.eu-west-1.compute.internal@BOOTCAMP-EUROPE.CONFLUENT.IO
+    
+kafka_broker:
+  hosts:
+    ip-172-30-19-241.eu-west-1.compute.internal:
+        kafka_broker_kerberos_keytab_path: /home/ubuntu/cp-ansible/kerberos/kafka-ip-172-30-19-241.keytab
+        kafka_broker_kerberos_principal: kafka/ip-172-30-19-241.eu-west-1.compute.internal@BOOTCAMP-EUROPE.CONFLUENT.IO
+    ip-172-30-27-71.eu-west-1.compute.internal:
+        kafka_broker_kerberos_keytab_path: /home/ubuntu/cp-ansible/kerberos/kafka-ip-172-30-27-71.keytab
+        kafka_broker_kerberos_principal: kafka/ip-172-30-27-71.eu-west-1.compute.internal@BOOTCAMP-EUROPE.CONFLUENT.IO
+    ip-172-30-19-221.eu-west-1.compute.internal:
+        kafka_broker_kerberos_keytab_path: /home/ubuntu/cp-ansible/kerberos/kafka-ip-172-30-19-221.keytab
+        kafka_broker_kerberos_principal: kafka/ip-172-30-19-221.eu-west-1.compute.internal@BOOTCAMP-EUROPE.CONFLUENT.IO
+    ip-172-30-21-129.eu-west-1.compute.internal:
+        kafka_broker_kerberos_keytab_path: /home/ubuntu/cp-ansible/kerberos/kafka-ip-172-30-21-129.keytab
+        kafka_broker_kerberos_principal: kafka/ip-172-30-21-129.eu-west-1.compute.internal@BOOTCAMP-EUROPE.CONFLUENT.IO
+    
+
+schema_registry:
+  hosts:
+    ip-172-30-23-4.eu-west-1.compute.internal:
+        schema_registry_kerberos_keytab_path: /home/ubuntu/cp-ansible/kerberos/schemaregistry-ip-172-30-23-4.keytab
+        schema_registry_kerberos_principal: schemaregistry/ip-172-30-23-4.eu-west-1.compute.internal@BOOTCAMP-EUROPE.CONFLUENT.IO
+    ip-172-30-28-145.eu-west-1.compute.internal:
+        schema_registry_kerberos_keytab_path: /home/ubuntu/cp-ansible/kerberos/schemaregistry-ip-172-30-28-145.keytab
+        schema_registry_kerberos_principal: schemaregistry/ip-172-30-28-145.eu-west-1.compute.internal@BOOTCAMP-EUROPE.CONFLUENT.IO
+    
+
+kafka_rest:
+  hosts:
+    ip-172-30-30-59.eu-west-1.compute.internal:
+        kafka_rest_kerberos_keytab_path: /home/ubuntu/cp-ansible/kerberos/rest-ip-172-30-30-59.keytab
+        kafka_rest_kerberos_principal: rest/ip-172-30-30-59.eu-west-1.compute.internal@BOOTCAMP-EUROPE.CONFLUENT.IO
+    
+
+ksql:
+  hosts:
+    ip-172-30-26-119.eu-west-1.compute.internal:
+        ksql_kerberos_keytab_path: /home/ubuntu/cp-ansible/kerberos/ksql-ip-172-30-26-119.keytab
+        ksql_kerberos_principal: ksql/ip-172-30-26-119.eu-west-1.compute.internal@BOOTCAMP-EUROPE.CONFLUENT.IO
+    ip-172-30-25-85.eu-west-1.compute.internal:
+        ksql_kerberos_keytab_path: /home/ubuntu/cp-ansible/kerberos/ksql-ip-172-30-25-85.keytab
+        ksql_kerberos_principal: ksql/ip-172-30-25-85.eu-west-1.compute.internal@BOOTCAMP-EUROPE.CONFLUENT.IO
+    
+
+kafka_connect:
+  hosts:
+    ip-172-30-25-242.eu-west-1.compute.internal:
+        kafka_connect_kerberos_keytab_path: /home/ubuntu/cp-ansible/kerberos/connect-ip-172-30-25-242.keytab
+        kafka_connect_kerberos_principal: connect/ip-172-30-25-242.eu-west-1.compute.internal@BOOTCAMP-EUROPE.CONFLUENT.IO
+    ip-172-30-20-237.eu-west-1.compute.internal:
+        kafka_connect_kerberos_keytab_path: /home/ubuntu/cp-ansible/kerberos/connect-ip-172-30-20-237.keytab
+        kafka_connect_kerberos_principal: connect/ip-172-30-20-237.eu-west-1.compute.internal@BOOTCAMP-EUROPE.CONFLUENT.IO
+    
+
+control_center:
+  hosts:
+    ip-172-30-30-186.eu-west-1.compute.internal:
+        control_center_kerberos_keytab_path: /home/ubuntu/cp-ansible/kerberos/controlcenter-ip-172-30-30-186.keytab
+        control_center_kerberos_principal: controlcenter/ip-172-30-30-186.eu-west-1.compute.internal@BOOTCAMP-EUROPE.CONFLUENT.IO
+    

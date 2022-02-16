@@ -1,0 +1,35 @@
+Jumphost ubuntu 20.04 lts
+curl http://checkip.amazonaws.com/
+ssh -i "~/Documents/rohit/keys/rohit.pem" ubuntu@ec2-34-244-76-171.eu-west-1.compute.amazonaws.com
+
+scp -i "~/Documents/rohit/keys/rohit.pem" hosts.yml ubuntu@ec2-34-244-76-171.eu-west-1.compute.amazonaws.com:~/feb-2022/hosts.yml
+
+scp -i "~/Documents/rohit/keys/rohit.pem" "~/Documents/rohit/keys/rohit.pem" ubuntu@ec2-34-244-76-171.eu-west-1.compute.amazonaws.com:~/.ssh
+
+scp -i "~/Documents/rohit/keys/rohit.pem" rohit.json ubuntu@ec2-34-244-76-171.eu-west-1.compute.amazonaws.com:~/feb-2022
+scp -i "~/Documents/rohit/keys/rohit.pem" create-certs.sh ubuntu@ec2-34-244-76-171.eu-west-1.compute.amazonaws.com:~/feb-2022
+
+scp -i "~/Documents/rohit/keys/rohit.pem" kafka-truststore.jks ubuntu@ec2-34-244-76-171.eu-west-1.compute.amazonaws.com:~/feb-2022
+scp -i "~/Documents/rohit/keys/rohit.pem" clients.zip ubuntu@ec2-34-244-76-171.eu-west-1.compute.amazonaws.com:~/feb-2022
+
+scp -i "~/Documents/rohit/keys/rohit.pem" clients.keytab.zip ubuntu@ec2-34-244-76-171.eu-west-1.compute.amazonaws.com:~/feb-2022
+
+CREATE STREAM rohit 
+  WITH (KAFKA_TOPIC ='rohit', VALUE_FORMAT='NONE');
+
+SELECT
+       COUNT(*) AS MSG_CT
+  FROM rohit
+  
+  EMIT CHANGES LIMIT 1;
+
+  questions:
+  - is it always going to be that ideal distributions of partitions
+  - tombstone & cleanup, is it instant?
+  - retentions.ms = -1 & cleanup policy as compact vs delete
+  - is there a way to know from whcih broker consumer is reading at the moment?
+  - Can we say with 100% confidence that kafka logs are immutable?
+  - 
+
+
+python3 convert-to-host.py --template hosts-kerberos.j2 rohit_2.json rohit-kerberos
