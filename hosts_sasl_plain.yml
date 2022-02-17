@@ -1,0 +1,103 @@
+# Automatically created from terraform data on
+all:
+  vars:
+    ansible_connection: ssh
+    ansible_user: ubuntu
+    ansible_become: true
+    ansible_ssh_private_key_file: rohit.pem
+    ssl_enabled: true
+
+    ssl_provided_keystore_and_truststore: true
+    ssl_keystore_filepath: "~/feb-2022/ssl/{{inventory_hostname}}-keystore.jks"
+    ssl_keystore_key_password: changeme
+    ssl_keystore_store_password: changeme
+    ssl_truststore_filepath: "~/feb-2022/ssl/kafka-truststore.jks"
+    ssl_truststore_password: changeme
+    ssl_truststore_ca_cert_alias: root-ca
+    # force recreation so that certs gets exported on /var/ssl/private/
+    regenerate_keystore_and_truststore: true
+    # let the certs error be logged, dont set for production, only good for troubleshooting
+    mask_secrets: false
+
+    # SASL Configurations
+    sasl_protocol: plain
+    sasl_plain_users:
+      admin:
+        principal: "kafka"
+        password: "admin-secret"
+      schema_registry:
+        principal: "schema-registry"
+        password: "schema_registry-secret"
+      kafka_connect:
+        principal: "kafka-connect"
+        password: "kafka_connect-secret"
+      ksql:
+        principal: "ksqldb"
+        password: "ksql-secret"
+      kafka_rest:
+        principal: "kafka_rest"
+        password: "kafka_rest-secret"
+      control_center:
+        principal: "control-center"
+        password: "control_center-secret"
+      kafka_connect_replicator:
+        principal: "kafka_connect_replicator"
+        password: "kafka_connect_replicator-secret"
+      client:
+        principal: "client"
+        password: "client-secret"
+      user1:
+        principal: "user1"
+        password: my-secret
+      user2:
+        principal: "user2"
+        password: my-secret
+      app-bootcamp:
+        principal: "app-bootcamp"
+        password: my-secret
+
+    kafka_broker_custom_properties:
+      authorizer.class.name: kafka.security.authorizer.AclAuthorizer
+      #super.users: User:kafka
+      super.users: User:kafka
+
+    # kafka_rest_custom_properties:
+    #   ssl.client.authentication: REQUIRED
+    #   confluent.rest.auth.propagate.method: SSL
+    #   kafka.rest.resource.extension.class: io.confluent.kafkarest.security.KafkaRestSecurityResourceExtension
+
+zookeeper:
+  hosts:
+    ip-172-30-23-66.eu-west-1.compute.internal:
+    ip-172-30-22-217.eu-west-1.compute.internal:
+    ip-172-30-27-93.eu-west-1.compute.internal:
+
+kafka_broker:
+  hosts:
+    ip-172-30-19-241.eu-west-1.compute.internal:
+    ip-172-30-27-71.eu-west-1.compute.internal:
+    ip-172-30-19-221.eu-west-1.compute.internal:
+    ip-172-30-21-129.eu-west-1.compute.internal:
+
+schema_registry:
+  hosts:
+    ip-172-30-23-4.eu-west-1.compute.internal:
+    ip-172-30-28-145.eu-west-1.compute.internal:
+
+kafka_rest:
+  hosts:
+    ip-172-30-30-59.eu-west-1.compute.internal:
+
+ksql:
+  hosts:
+    ip-172-30-26-119.eu-west-1.compute.internal:
+    ip-172-30-25-85.eu-west-1.compute.internal:
+
+kafka_connect:
+  hosts:
+    ip-172-30-25-242.eu-west-1.compute.internal:
+    ip-172-30-20-237.eu-west-1.compute.internal:
+
+control_center:
+  hosts:
+    ip-172-30-30-186.eu-west-1.compute.internal:

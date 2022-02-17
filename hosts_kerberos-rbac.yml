@@ -33,22 +33,56 @@ all:
     sasl_protocol: kerberos
     zookeeper_sasl_protocol: kerberos
 
+    #### Configuring Role Based Access Control ####
+    ## To have CP-Ansible configure Components for RBAC and create necessary role bindings, set these mandatory variables:
+    ## Note: Confluent components will be configured to connect to the "internal" listener automatically
+    ## DO NOT UPDATE the internal listener
+    ## Note: It is recommended to create an additional listener for external clients, but the interbroker listener would also work
+    ## Note: An authentication mode must be selected on all listeners, for example (ssl_enabled=false and ssl_mutual_auth_enabled=false) or sasl_protocol=none is not supported.
+    rbac_enabled: true
+    ##
+    ## LDAP Users
+    ## Note: Below users must already exist in your LDAP environment.  See kafka_broker vars, for LDAP connection details.
+    mds_super_user: admin
+    mds_super_user_password: admin-secret
+    kafka_broker_ldap_user: kafka
+    kafka_broker_ldap_password: kafka-secret
+    schema_registry_ldap_user: schemaregistry
+    schema_registry_ldap_password: schemaregistry-secret
+    kafka_connect_ldap_user: connect
+    kafka_connect_ldap_password: connect-secret
+    ksql_ldap_user: ksql
+    ksql_ldap_password: ksql-secret
+    kafka_rest_ldap_user: rest
+    kafka_rest_ldap_password: rest-secret
+    control_center_ldap_user: controlcenter
+    control_center_ldap_password: controlcenter-secret
+    ## Below are optional variables
+    create_mds_certs: false # To provide your own MDS Certs set this variable and the next two
+    token_services_public_pem_file: /home/ubuntu/feb-2022/mds-certs/mds.pub
+    token_services_private_pem_file: /home/ubuntu/feb-2022/mds-certs/mds
+
+    #### End of Configuration
+
     kafka_broker_custom_properties:
-      authorizer.class.name: kafka.security.authorizer.AclAuthorizer
-      super.users: User:admin;User:admin@BOOTCAMP-EUROPE.CONFLUENT.IO;User:kafka;User:connect;User:schemaregistry;User:controlcenter;User:ksql
-    # zookeeper_custom_properties:
-    #   # These are configuration to enable SASL authentication
-    #   authProvider.1: org.apache.zookeeper.server.auth.SASLAuthenticationProvider
-    #   requireClientAuthScheme: sasl
-
-    #   # These are configuration to remove hostname and realm from Kerberos principal
-    #   kerberos.removeHostFromPrincipal: true
-    #   kerberos.removeRealmFromPrincipal: true
-
-    # kafka_rest_custom_properties:
-    #   ssl.client.authentication: REQUIRED
-    #   confluent.rest.auth.propagate.method: SSL
-    #   kafka.rest.resource.extension.class: io.confluent.kafkarest.security.KafkaRestSecurityResourceExtension
+      ldap.java.naming.factory.initial: com.sun.jndi.ldap.LdapCtxFactory
+      ldap.com.sun.jndi.ldap.read.timeout: 3000
+      ldap.java.naming.provider.url: ldap://ip-172-30-22-248.eu-west-1.compute.internal:389
+      ldap.java.naming.security.principal: admin@BOOTCAMP-EUROPE.CONFLUENT.IO
+      ldap.java.naming.security.credentials: admin-secret
+      ldap.java.naming.security.authentication: simple
+      ldap.user.search.base: OU=Kafka,DC=BOOTCAMP-EUROPE,DC=CONFLUENT,DC=IO
+      ldap.user.search.object.class: user
+      ldap.group.search.base: OU=Groups,OU=Kafka,DC=BOOTCAMP-EUROPE,DC=CONFLUENT,DC=IO
+      ldap.authorizer.group.search.scope: 2
+      ldap.authorizer.user.search.scope: 2
+      ldap.search.mode: USERS
+      ldap.user.name.attribute: sAMAccountName
+      ldap.user.memberof.attribute: memberOf
+      ldap.user.memberof.attribute.pattern: CN=(.*),OU=Groups,OU=Kafka,DC=BOOTCAMP-EUROPE,DC=CONFLUENT,DC=IO
+      ldap.group.name.attribute: cn
+      ldap.group.member.attribute.pattern: CN=(.*),OU=Users,OU=Kafka,DC=BOOTCAMP-EUROPE,DC=CONFLUENT,DC=IO
+      ldap.user.object.class: user
 
 zookeeper:
   hosts:
